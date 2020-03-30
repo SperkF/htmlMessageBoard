@@ -1,0 +1,4 @@
+
+#thisis a comment
+
+*.txt #ignore all .txt files
