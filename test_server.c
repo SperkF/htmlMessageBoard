@@ -52,11 +52,12 @@ int main(void)
     char s1[INET6_ADDRSTRLEN];
     int rv;
 
-    memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_STREAM;
+    memset(&hints, 0, sizeof hints); //make sure hints it set to all 0
+    hints.ai_family = AF_INET; //inet protocol
+    hints.ai_socktype = SOCK_STREAM; //TCP socket (not UDP =SOCK_DATA)
     hints.ai_flags = AI_PASSIVE; // use my IP
 
+//create linked-list with possible server setings for chosen configuration
     if ((rv = getaddrinfo(NULL, PORT, &hints, &servinfo)) != 0)
     {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
@@ -71,7 +72,8 @@ int main(void)
             perror("server: socket");
             continue;
         }
-      //set options for created socket ->see OneNote
+      //set options for created socket ->see OneNote (basicly we just make sure the port is "empty" and we
+      // can bind our socket to it)
         if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes,
                 sizeof(int)) == -1) {
             perror("setsockopt");
@@ -105,7 +107,7 @@ int main(void)
 
 //setup signalhandler with sigaction()
     sa.sa_handler = sigchld_handler; // reap all dead processes
-    sigemptyset(&sa.sa_mask);
+    sigemptyset(&sa.sa_mask); //init mask to mask for no signal
     sa.sa_flags = SA_RESTART;
     if (sigaction(SIGCHLD, &sa, NULL) == -1) {
         perror("sigaction");

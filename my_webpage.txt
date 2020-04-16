@@ -1,0 +1,21 @@
+<<!DOCTYPE html> <--!tells browser in which html standard the following code is written-->
+<--!in this case we declare that we are using html5 -->
+
+<html>
+	<!-- This is a comment-->
+
+	<head>  <--!The head does not display in the browser-->
+		<--!Metadata, for search engines-->
+		<--!links to Java-Skripts...-->
+    <meta charset="utf-8">
+    <title> Page title </title>
+	</head>
+
+
+	<body>   <--!The body will be displayed in the browser-->
+		<h1> Header type 1 </h1>   <--!header are from level 1 to level 6 h6-->
+		<p> This is a paragraph </p>
+		<p> Another paragraph </p>
+	</body>
+
+</html>
